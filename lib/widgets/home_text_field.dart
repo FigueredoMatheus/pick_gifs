@@ -5,22 +5,21 @@ class HomeTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const TextField(
-      cursorColor: Colors.white,
-      style: TextStyle(color: Colors.white),
-      decoration: InputDecoration(
-        labelText: 'Pesquisar por',
-        labelStyle: TextStyle(color: Colors.white),
-        border: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.teal),
+    return const Expanded(
+      child: TextField(
+        cursorColor: Colors.white,
+        style: TextStyle(color: Colors.white),
+        decoration: InputDecoration(
+          labelText: 'Pesquisar por',
+          labelStyle: TextStyle(color: Colors.white),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(width: 1, color: Colors.black),
+          ),
+          focusColor: Colors.white,
+          filled: true,
+          fillColor: Colors.black26,
+          hintStyle: TextStyle(color: Colors.white),
         ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(width: 1, color: Colors.black),
-        ),
-        focusColor: Colors.white,
-        filled: true,
-        fillColor: Colors.black26,
-        hintStyle: TextStyle(color: Colors.white),
       ),
     );
   }
