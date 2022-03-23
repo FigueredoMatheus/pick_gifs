@@ -16,12 +16,13 @@ class GifsGrid extends StatelessWidget {
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
       ),
-      itemCount: 4,
+      itemCount: snapshot.data['data'].length,
       itemBuilder: (context, index) {
         return GestureDetector(
           child: Expanded(
-            child: Container(
-              color: Colors.red,
+            child: Image.network(
+              snapshot.data['data'][index]['images']['original']['url'],
+              fit: BoxFit.cover,
             ),
           ),
         );
