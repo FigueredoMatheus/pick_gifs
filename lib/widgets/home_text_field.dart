@@ -17,6 +17,9 @@ class _HomeTextFieldState extends State<HomeTextField> {
         controller: gifsController.searchTextController,
         cursorColor: Colors.white,
         style: const TextStyle(color: Colors.white),
+        onSubmitted: (_) {
+          gifsController.triggerShowGifs();
+        },
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
           labelText: 'Pesquisar por',

@@ -18,6 +18,7 @@ class _GifsPageState extends State<GifsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.black54,
       appBar: AppBar(
         backgroundColor: Colors.black,
