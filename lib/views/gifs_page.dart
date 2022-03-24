@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gifs_search/controllers/gifs_controller.dart';
-import 'package:gifs_search/gifs_api.dart';
+import 'package:gifs_search/controllers/app_controller.dart';
+import 'package:gifs_search/controllers/gifs_api.dart';
 import 'package:gifs_search/widgets/gifs.grid.dart';
 import 'package:gifs_search/widgets/home_text_field.dart';
 import 'package:gifs_search/widgets/search_button.dart';
@@ -13,7 +13,7 @@ class GifsPage extends StatefulWidget {
 }
 
 class _GifsPageState extends State<GifsPage> {
-  final gifsController = GifsController();
+  final appController = AppController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,11 +41,11 @@ class _GifsPageState extends State<GifsPage> {
               height: 20,
             ),
             ValueListenableBuilder(
-              valueListenable: gifsController.showGifs,
+              valueListenable: appController.showGifs,
               builder: (context, _, __) {
                 return Expanded(
                   child: FutureBuilder(
-                    future: gifsController.gifsFuture(),
+                    future: appController.gifsFuture(),
                     builder: (context, snapshot) {
                       switch (snapshot.connectionState) {
                         case ConnectionState.waiting:
@@ -72,7 +72,8 @@ class _GifsPageState extends State<GifsPage> {
                               ),
                             );
                           } else {
-                            return GifsGrid(snapshot: snapshot);
+                            AsyncSnapshot newSnapshot = snapshot;
+                            return GifsGrid(gifs: newSnapshot.data['data']);
                           }
                       }
                     },

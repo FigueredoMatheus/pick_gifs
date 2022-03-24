@@ -1,18 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:gifs_search/controllers/local_store_controller.dart';
-import 'package:gifs_search/gifs_api.dart';
+import 'package:gifs_search/controllers/gifs_api.dart';
 import 'package:flutter_share/flutter_share.dart';
 
-class GifsController {
-  static final GifsController _singleton = GifsController._internal();
+class AppController {
+  static final AppController _singleton = AppController._internal();
 
-  factory GifsController() {
+  factory AppController() {
     return _singleton;
   }
 
-  GifsController._internal();
+  AppController._internal();
 
   LocalStoreController localStoreController = LocalStoreController();
+
+  GifsAPIController gifsAPIController = GifsAPIController();
 
   TextEditingController searchTextController = TextEditingController();
 
@@ -22,8 +24,9 @@ class GifsController {
 
   ValueNotifier<bool> showGifs = ValueNotifier(false);
 
-  void addFavoriteGif(Map gif) {
+  void saveGifAsFavorite(Map gif) {
     favoriteGifs.value.add(gif);
+    localStoreController.saveGifAsFavorite(favoriteGifs.value);
   }
 
   int gifsGridItemCount(List data) {
@@ -45,9 +48,10 @@ class GifsController {
 
   Future<Map> gifsFuture() {
     if (searchTextController.text.isEmpty) {
-      return GifsAPI.getTrendingGifs();
+      return gifsAPIController.getTrendingGifs();
     } else {
-      return GifsAPI.getSearchGifs(searchTextController.text, searchOffset);
+      return gifsAPIController.getSearchGifs(
+          searchTextController.text, searchOffset);
     }
   }
 

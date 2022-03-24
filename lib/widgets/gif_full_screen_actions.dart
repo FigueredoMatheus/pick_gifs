@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gifs_search/controllers/gifs_controller.dart';
+import 'package:gifs_search/controllers/app_controller.dart';
 
 class GifFullScreenAction extends StatefulWidget {
   final Map gifData;
@@ -14,7 +14,7 @@ class _GifFullScreenActionState extends State<GifFullScreenAction> {
   bool isFavorite = false;
   @override
   Widget build(BuildContext context) {
-    final gifsController = GifsController();
+    final appController = AppController();
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       width: double.infinity,
@@ -34,7 +34,7 @@ class _GifFullScreenActionState extends State<GifFullScreenAction> {
           ),
           IconButton(
             onPressed: () {
-              gifsController.shareGifUrl(
+              appController.shareGifUrl(
                 widget.gifData['images']['original']['url'],
               );
             },

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gifs_search/controllers/gifs_controller.dart';
+import 'package:gifs_search/controllers/app_controller.dart';
 
 class HomeTextField extends StatefulWidget {
   const HomeTextField({Key? key}) : super(key: key);
@@ -9,16 +9,16 @@ class HomeTextField extends StatefulWidget {
 }
 
 class _HomeTextFieldState extends State<HomeTextField> {
-  final gifsController = GifsController();
+  final appController = AppController();
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: TextField(
-        controller: gifsController.searchTextController,
+        controller: appController.searchTextController,
         cursorColor: Colors.white,
         style: const TextStyle(color: Colors.white),
         onSubmitted: (_) {
-          gifsController.triggerShowGifs();
+          appController.triggerShowGifs();
         },
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
