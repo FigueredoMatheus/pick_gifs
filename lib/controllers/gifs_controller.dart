@@ -42,7 +42,7 @@ class GifsController {
     }
   }
 
-  Future<void> shareGif(String gifUrl) async {
+  Future<void> shareGifUrl(String gifUrl) async {
     await FlutterShare.share(title: 'Gif maravilhoso!', linkUrl: gifUrl);
   }
 }
