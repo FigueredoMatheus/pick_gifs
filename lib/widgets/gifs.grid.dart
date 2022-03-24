@@ -29,11 +29,9 @@ class GifsGrid extends StatelessWidget {
             itemCount: snapshot.data['data'].length,
             itemBuilder: (context, index) {
               return GestureDetector(
-                child: Expanded(
-                  child: Image.network(
-                    snapshot.data['data'][index]['images']['original']['url'],
-                    fit: BoxFit.cover,
-                  ),
+                child: Image.network(
+                  snapshot.data['data'][index]['images']['original']['url'],
+                  fit: BoxFit.cover,
                 ),
               );
             },
