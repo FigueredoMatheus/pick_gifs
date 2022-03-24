@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:gifs_search/gifs_api.dart';
+import 'package:flutter_share/flutter_share.dart';
 
 class GifsController {
   static final GifsController _singleton = GifsController._internal();
@@ -39,5 +40,9 @@ class GifsController {
     } else {
       return GifsAPI.getSearchGifs(searchTextController.text, searchOffset);
     }
+  }
+
+  Future<void> shareGif(String gifUrl) async {
+    await FlutterShare.share(title: 'Gif maravilhoso!', linkUrl: gifUrl);
   }
 }
