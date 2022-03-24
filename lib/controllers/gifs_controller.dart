@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:gifs_search/controllers/local_store_controller.dart';
 import 'package:gifs_search/gifs_api.dart';
 import 'package:flutter_share/flutter_share.dart';
 
@@ -11,11 +12,19 @@ class GifsController {
 
   GifsController._internal();
 
+  LocalStoreController localStoreController = LocalStoreController();
+
   TextEditingController searchTextController = TextEditingController();
+
+  ValueNotifier<List<Map>> favoriteGifs = ValueNotifier([]);
 
   int searchOffset = 0;
 
   ValueNotifier<bool> showGifs = ValueNotifier(false);
+
+  void addFavoriteGif(Map gif) {
+    favoriteGifs.value.add(gif);
+  }
 
   int gifsGridItemCount(List data) {
     if (searchTextController.text.isEmpty) {
