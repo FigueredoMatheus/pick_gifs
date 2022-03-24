@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:gifs_search/controllers/local_store_controller.dart';
 import 'package:gifs_search/controllers/gifs_api.dart';
@@ -18,15 +20,21 @@ class AppController {
 
   TextEditingController searchTextController = TextEditingController();
 
-  ValueNotifier<List<Map>> favoriteGifs = ValueNotifier([]);
+  ValueNotifier<List> listFavoriteGifs = ValueNotifier([]);
 
   int searchOffset = 0;
 
   ValueNotifier<bool> showGifs = ValueNotifier(false);
 
   void saveGifAsFavorite(Map gif) {
-    favoriteGifs.value.add(gif);
-    localStoreController.saveGifAsFavorite(favoriteGifs.value);
+    listFavoriteGifs.value.add(gif);
+    localStoreController.saveGifAsFavorite(listFavoriteGifs.value);
+  }
+
+  Future<void> getFavoriteGifs() async {
+    await localStoreController.getFavoriteGifs().then((favoriteGifs) {
+      listFavoriteGifs.value = json.decode(favoriteGifs);
+    });
   }
 
   int gifsGridItemCount(List data) {

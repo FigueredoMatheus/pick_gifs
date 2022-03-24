@@ -24,6 +24,7 @@ class _GifFullScreenActionState extends State<GifFullScreenAction> {
         children: [
           IconButton(
             onPressed: () {
+              appController.saveGifAsFavorite(widget.gifData);
               setState(() {
                 isFavorite = !isFavorite;
               });
