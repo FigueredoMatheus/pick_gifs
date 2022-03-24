@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gifs_search/app.dart';
-import 'package:gifs_search/views/home_page.dart';
 
 void main() {
   runApp(const MyApp());
