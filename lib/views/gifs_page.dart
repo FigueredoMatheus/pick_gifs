@@ -54,7 +54,6 @@ class _GifsPageState extends State<GifsPage> {
                         seatchOffset,
                       ),
                 builder: (context, snapshot) {
-                  print(searchController.text);
                   switch (snapshot.connectionState) {
                     case ConnectionState.waiting:
                       return const SizedBox(
