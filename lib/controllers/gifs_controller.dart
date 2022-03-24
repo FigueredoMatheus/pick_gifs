@@ -10,21 +10,34 @@ class GifsController {
 
   GifsController._internal();
 
-  TextEditingController searchController = TextEditingController();
+  TextEditingController searchTextController = TextEditingController();
 
   int searchOffset = 0;
 
   ValueNotifier<bool> showGifs = ValueNotifier(false);
 
+  int gifsGridItemCount(List data) {
+    if (searchTextController.text.isEmpty) {
+      return data.length;
+    } else {
+      return data.length + 1;
+    }
+  }
+
   triggerShowGifs() {
     showGifs.value = !showGifs.value;
   }
 
+  loadMoreGifs() {
+    searchOffset += 25;
+    triggerShowGifs();
+  }
+
   Future<Map> gifsFuture() {
-    if (searchController.text.isEmpty) {
+    if (searchTextController.text.isEmpty) {
       return GifsAPI.getTrendingGifs();
     } else {
-      return GifsAPI.getSearchGifs(searchController.text, searchOffset);
+      return GifsAPI.getSearchGifs(searchTextController.text, searchOffset);
     }
   }
 }

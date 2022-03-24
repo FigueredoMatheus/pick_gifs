@@ -14,7 +14,7 @@ class _HomeTextFieldState extends State<HomeTextField> {
   Widget build(BuildContext context) {
     return Expanded(
       child: TextField(
-        controller: gifsController.searchController,
+        controller: gifsController.searchTextController,
         cursorColor: Colors.white,
         style: const TextStyle(color: Colors.white),
         decoration: const InputDecoration(
