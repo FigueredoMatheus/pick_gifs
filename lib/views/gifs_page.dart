@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gifs_search/controllers/gifs_controller.dart';
 import 'package:gifs_search/gifs_api.dart';
 import 'package:gifs_search/widgets/gifs.grid.dart';
 import 'package:gifs_search/widgets/home_text_field.dart';
@@ -12,12 +13,7 @@ class GifsPage extends StatefulWidget {
 }
 
 class _GifsPageState extends State<GifsPage> {
-  TextEditingController searchController = TextEditingController();
-  int seatchOffset = 0;
-
-  searchGifs() {
-    setState(() {});
-  }
+  final gifsController = GifsController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,56 +30,54 @@ class _GifsPageState extends State<GifsPage> {
         child: Column(
           children: [
             Row(
-              children: [
-                HomeTextField(textController: searchController),
-                const SizedBox(width: 10),
-                SearchButton(
-                  searchGifs: searchGifs,
-                ),
+              children: const [
+                HomeTextField(),
+                SizedBox(width: 10),
+                SearchButton(),
               ],
             ),
             const SizedBox(
               height: 20,
             ),
-            Expanded(
-              child: FutureBuilder(
-                future: searchController.text.isEmpty
-                    ? GifsAPI.getTrendingGifs()
-                    : GifsAPI.getSearchGifs(
-                        searchController.text,
-                        seatchOffset,
-                      ),
-                builder: (context, snapshot) {
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.waiting:
-                      return const SizedBox(
-                        width: 50,
-                        height: 50,
-                        child: FittedBox(
-                          child: CircularProgressIndicator(
-                            valueColor:
-                                AlwaysStoppedAnimation<Color>(Colors.white),
-                          ),
-                        ),
-                      );
-
-                    default:
-                      if (snapshot.hasError) {
-                        return const Center(
-                          child: Text(
-                            'Algo deu errado :(',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 22,
+            ValueListenableBuilder(
+              valueListenable: gifsController.showGifs,
+              builder: (context, _, __) {
+                return Expanded(
+                  child: FutureBuilder(
+                    future: gifsController.gifsFuture(),
+                    builder: (context, snapshot) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.waiting:
+                          return const SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: FittedBox(
+                              child: CircularProgressIndicator(
+                                valueColor:
+                                    AlwaysStoppedAnimation<Color>(Colors.white),
+                              ),
                             ),
-                          ),
-                        );
-                      } else {
-                        return GifsGrid(snapshot: snapshot);
+                          );
+
+                        default:
+                          if (snapshot.hasError) {
+                            return const Center(
+                              child: Text(
+                                'Algo deu errado :(',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 22,
+                                ),
+                              ),
+                            );
+                          } else {
+                            return GifsGrid(snapshot: snapshot);
+                          }
                       }
-                  }
-                },
-              ),
+                    },
+                  ),
+                );
+              },
             ),
           ],
         ),
