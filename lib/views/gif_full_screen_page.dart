@@ -8,11 +8,12 @@ class GifFullScreenPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(gifData['username']);
     return Scaffold(
       backgroundColor: Colors.grey,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text(gifData['username']),
+        title: Text(gifData['username'].isEmpty ? 'Gif' : gifData['username']),
         centerTitle: true,
       ),
       body: Column(
