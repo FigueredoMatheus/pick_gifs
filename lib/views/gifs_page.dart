@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gifs_search/controllers/app_controller.dart';
-import 'package:gifs_search/controllers/gifs_api.dart';
 import 'package:gifs_search/widgets/gifs.grid.dart';
 import 'package:gifs_search/widgets/home_text_field.dart';
 import 'package:gifs_search/widgets/search_button.dart';
