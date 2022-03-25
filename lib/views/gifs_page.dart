@@ -61,14 +61,25 @@ class _GifsPageState extends State<GifsPage> {
 
                         default:
                           if (snapshot.hasError) {
-                            return const Center(
-                              child: Text(
-                                'Algo deu errado :(',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 22,
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  'Algo deu errado :(',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 22,
+                                  ),
                                 ),
-                              ),
+                                const SizedBox(height: 10),
+                                Text(
+                                  snapshot.error.toString(),
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 22,
+                                  ),
+                                ),
+                              ],
                             );
                           } else {
                             AsyncSnapshot newSnapshot = snapshot;
