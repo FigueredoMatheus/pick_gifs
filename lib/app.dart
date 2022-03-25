@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gifs_search/controllers/app_controller.dart';
 import 'package:gifs_search/views/favorite_page.dart';
 import 'package:gifs_search/views/gifs_page.dart';
 
@@ -13,6 +14,13 @@ class _AppState extends State<App> {
   int currentPageIndex = 0;
 
   final screen = [const GifsPage(), const FavoritePage()];
+
+  @override
+  void initState() {
+    final appController = AppController();
+    appController.getFavoriteGifs();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
