@@ -13,6 +13,20 @@ class GifFullScreenAction extends StatefulWidget {
 class _GifFullScreenActionState extends State<GifFullScreenAction> {
   bool isFavorite = false;
   @override
+  void initState() {
+    final appController = AppController();
+    super.initState();
+    for (var gif in appController.listFavoriteGifs.value) {
+      if (gif['id'] == widget.gifData['id']) {
+        setState(() {
+          isFavorite = true;
+        });
+        break;
+      }
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final appController = AppController();
     return Container(
