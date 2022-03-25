@@ -48,10 +48,9 @@ flutter_native_splash:
   ios: true
 
 flutter_icons:
-  image_path: "assets/MFB - logo.png"
   ios: true
-  remove_alpha_ios: true
   android: true
+  image_path: "assets/MFB - logo.png" 
   adaptative_icon_background: "#1E2A50"
   adaptative_icon_foreground: "assets/MFB - logo.png"
 
