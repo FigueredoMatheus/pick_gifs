@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gifs_search/controllers/app_controller.dart';
-import 'package:gifs_search/widgets/gifs.grid.dart';
+import 'package:gifs_search/widgets/gifs_grid.dart';
 
 class FavoritePage extends StatefulWidget {
   const FavoritePage({Key? key}) : super(key: key);
