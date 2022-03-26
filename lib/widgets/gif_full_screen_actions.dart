@@ -16,7 +16,7 @@ class _GifFullScreenActionState extends State<GifFullScreenAction> {
   void initState() {
     final appController = AppController();
     super.initState();
-    for (var gif in appController.listFavoriteGifs.value) {
+    for (var gif in appController.listFavoriteGifs) {
       if (gif['id'] == widget.gifData['id']) {
         setState(() {
           isFavorite = true;
@@ -38,7 +38,12 @@ class _GifFullScreenActionState extends State<GifFullScreenAction> {
         children: [
           IconButton(
             onPressed: () {
-              appController.saveGifAsFavorite(widget.gifData);
+              if (isFavorite) {
+                appController.removeGifAsFavorite(widget.gifData);
+              } else {
+                appController.saveGifAsFavorite(widget.gifData);
+              }
+              appController.triggerFavoritePage();
               setState(() {
                 isFavorite = !isFavorite;
               });

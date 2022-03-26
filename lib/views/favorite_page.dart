@@ -15,28 +15,32 @@ class _FavoritePageState extends State<FavoritePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black54,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        centerTitle: true,
-        title: const Text('Gifs Favoritos'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: appController.listFavoriteGifs.value.isEmpty
-            ? const Center(
-                child: Text(
-                  'Nenhum gif encontrado :(',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                  ),
-                ),
-              )
-            : GifsGrid(
-                gifs: appController.listFavoriteGifs.value,
-              ),
-      ),
-    );
+        backgroundColor: Colors.black54,
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          centerTitle: true,
+          title: const Text('Gifs Favoritos'),
+        ),
+        body: ValueListenableBuilder(
+          valueListenable: appController.notifierFavoritePage,
+          builder: (context, value, child) {
+            return Padding(
+              padding: const EdgeInsets.all(20),
+              child: appController.listFavoriteGifs.isEmpty
+                  ? const Center(
+                      child: Text(
+                        'Nenhum gif encontrado :(',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                        ),
+                      ),
+                    )
+                  : GifsGrid(
+                      gifs: appController.listFavoriteGifs,
+                    ),
+            );
+          },
+        ));
   }
 }

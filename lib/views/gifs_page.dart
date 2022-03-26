@@ -40,7 +40,7 @@ class _GifsPageState extends State<GifsPage> {
               height: 20,
             ),
             ValueListenableBuilder(
-              valueListenable: appController.showGifs,
+              valueListenable: appController.notifierGifsPage,
               builder: (context, _, __) {
                 return Expanded(
                   child: FutureBuilder(

@@ -20,20 +20,27 @@ class AppController {
 
   TextEditingController searchTextController = TextEditingController();
 
-  ValueNotifier<List> listFavoriteGifs = ValueNotifier([]);
+  List listFavoriteGifs = [];
+
+  ValueNotifier<bool> notifierFavoritePage = ValueNotifier(false);
 
   int searchOffset = 0;
 
-  ValueNotifier<bool> showGifs = ValueNotifier(false);
+  ValueNotifier<bool> notifierGifsPage = ValueNotifier(false);
 
   void saveGifAsFavorite(Map gif) {
-    listFavoriteGifs.value.add(gif);
-    localStoreController.saveGifAsFavorite(listFavoriteGifs.value);
+    listFavoriteGifs.add(gif);
+    localStoreController.saveGifAsFavorite(listFavoriteGifs);
+  }
+
+  void removeGifAsFavorite(Map gif) {
+    listFavoriteGifs.remove(gif);
+    localStoreController.saveGifAsFavorite(listFavoriteGifs);
   }
 
   Future<void> getFavoriteGifs() async {
     await localStoreController.getFavoriteGifs().then((favoriteGifs) {
-      listFavoriteGifs.value = json.decode(favoriteGifs);
+      listFavoriteGifs = json.decode(favoriteGifs);
     });
   }
 
@@ -46,7 +53,11 @@ class AppController {
   }
 
   triggerShowGifs() {
-    showGifs.value = !showGifs.value;
+    notifierGifsPage.value = !notifierGifsPage.value;
+  }
+
+  triggerFavoritePage() {
+    notifierFavoritePage.value = !notifierFavoritePage.value;
   }
 
   loadMoreGifs() {
