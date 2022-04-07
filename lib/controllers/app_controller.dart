@@ -12,6 +12,8 @@ class AppController {
     return _singleton;
   }
 
+  int currentPageIndex = 0;
+
   AppController._internal();
 
   LocalStoreController localStoreController = LocalStoreController();
@@ -51,7 +53,7 @@ class AppController {
   }
 
   int gifsGridItemCount(List data) {
-    if (searchTextController.text.isEmpty) {
+    if (currentPageIndex == 1 || searchTextController.text.isEmpty) {
       return data.length;
     } else {
       return data.length + 1;

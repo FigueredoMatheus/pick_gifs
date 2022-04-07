@@ -11,8 +11,6 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  int currentPageIndex = 0;
-
   final screen = [const GifsPage(), const FavoritePage()];
 
   @override
@@ -24,17 +22,18 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
+    final appController = AppController();
     return Scaffold(
-      body: screen[currentPageIndex],
+      body: screen[appController.currentPageIndex],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black87,
         selectedItemColor: Colors.white,
         selectedLabelStyle: const TextStyle(color: Colors.white),
         unselectedItemColor: Colors.grey,
         unselectedLabelStyle: const TextStyle(color: Colors.grey),
-        currentIndex: currentPageIndex,
+        currentIndex: appController.currentPageIndex,
         onTap: (pageIndex) => setState(() {
-          currentPageIndex = pageIndex;
+          appController.currentPageIndex = pageIndex;
         }),
         items: const [
           BottomNavigationBarItem(
