@@ -29,13 +29,19 @@ class AppController {
   ValueNotifier<bool> notifierGifsPage = ValueNotifier(false);
 
   void saveGifAsFavorite(Map gif) {
+    if (listFavoriteHasGif(gif['id'])) {
+      return;
+    }
+
     listFavoriteGifs.add(gif);
     localStoreController.saveGifAsFavorite(listFavoriteGifs);
+    triggerFavoritePage();
   }
 
   void removeGifAsFavorite(Map gif) {
-    listFavoriteGifs.remove(gif);
+    listFavoriteGifs.removeWhere((favGif) => favGif['id'] == gif['id']);
     localStoreController.saveGifAsFavorite(listFavoriteGifs);
+    triggerFavoritePage();
   }
 
   Future<void> getFavoriteGifs() async {
@@ -76,5 +82,9 @@ class AppController {
 
   Future<void> shareGifUrl(String gifUrl) async {
     await FlutterShare.share(title: 'Gif maravilhoso!', linkUrl: gifUrl);
+  }
+
+  bool listFavoriteHasGif(String gifId) {
+    return listFavoriteGifs.any((gif) => gif['id'] == gifId);
   }
 }

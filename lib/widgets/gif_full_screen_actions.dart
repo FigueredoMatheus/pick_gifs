@@ -43,7 +43,6 @@ class _GifFullScreenActionState extends State<GifFullScreenAction> {
               } else {
                 appController.saveGifAsFavorite(widget.gifData);
               }
-              appController.triggerFavoritePage();
               setState(() {
                 isFavorite = !isFavorite;
               });
