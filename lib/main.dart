@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       ),
     );
     return MaterialApp(
-      title: 'Buscador de Gifs',
+      title: 'Pick Gifs',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
